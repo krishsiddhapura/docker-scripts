@@ -4,7 +4,6 @@ This repository contains basic Docker configurations and scripts for deploying v
 
 [//]: # (The examples provided cover popular technologies such as **Laravel &#40;PHP&#41;**, **Node.js &#40;Express&#41;**, **Python &#40;Flask&#41;**, and **Static Websites &#40;Nginx&#41;**, enabling easy deployment with Docker.)
 
-#
 ## Supported Technologies
 
 - **Laravel (PHP-FPM + Nginx)** – A popular PHP framework for building modern web applications.
@@ -13,7 +12,6 @@ This repository contains basic Docker configurations and scripts for deploying v
 [//]: # (- **Python &#40;Flask&#41;** – A lightweight WSGI web application framework in Python.)
 [//]: # (- **Static Websites &#40;Nginx&#41;** – Easily deploy static content using the fast and efficient Nginx web server.)
 
-#
 ## Quick Start Guide
 
 Follow these simple steps to build and deploy your Dockerized application:
