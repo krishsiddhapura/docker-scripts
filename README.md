@@ -51,3 +51,7 @@ Once the container is running, you can access your application via the following
 
 - For **Laravel**: 127.0.0.1:9090
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
