@@ -1,0 +1,25 @@
+services:
+  # BUILDING LARAVEL IMAGE WITH DOCKER FILE
+  laravel:
+    build: .
+    depends_on:
+      - mysql
+    ports:
+      - "8080:80"
+    environment:
+      COMPOSER_ALLOW_SUPERUSER: 1
+  # PULLING MYSQL IMAGE AND SETTING UP ENVIRONMENT
+  mysql:
+    image: "mysql:8.0.40"
+    ports:
+      - "3366:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "db_laravel_demo"
+      MYSQL_USER: "newuser"
+      MYSQL_PASSWORD: "root"
+    volumes:
+      - 'mysql:/var/lib/mysql'
+# VOLUMES THAT WILL BE USED FOR PERSISTENT DATA STORAGE
+volumes:
+  mysql:
