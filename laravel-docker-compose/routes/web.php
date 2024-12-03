@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\web\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(IndexController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/upload-file', 'create')->name('upload-file');
+});
+
+Route::get('/phpinfo', function () {
+    echo phpinfo();
 });

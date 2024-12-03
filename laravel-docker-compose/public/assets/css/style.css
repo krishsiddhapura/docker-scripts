@@ -1,0 +1,41 @@
+body {
+    display: grid;
+    min-height: 100vh;
+    background-color: #2d3748;
+}
+
+input[type="file"] {
+    margin: auto;
+    padding: 0.8rem;
+    border-radius: 15px;
+    border: 2px dashed #bbb;
+    background-color: #fff;
+    transition: border-color .25s ease-in-out;
+    &::file-selector-button{
+        padding: 1em 1.5em;
+        border-width: 0;
+        border-radius: 2em;
+        background-color: hsl(210 70% 30%);
+        color: hsl(210 40% 90%);
+        transition: all .25s ease-in-out;
+        cursor: pointer;
+        margin-right: 1em;
+    }
+    &:hover {
+        border-color: #888;
+        &::file-selector-button{
+            background-color: hsl(210 70% 40%);
+        }
+    }
+}
+
+.button-paper {
+    color: hsl(210 40% 90%);
+    border-radius: 10px !important;
+    border: 2px dashed #bbb !important;
+    background-color: hsl(210 70% 30%);
+}
+.button-paper:hover {
+    border: 2px dashed hsl(210 70% 30%) !important;
+    background-color: #fff;
+}

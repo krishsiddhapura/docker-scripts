@@ -1,16 +1,24 @@
 services:
-  # BUILDING LARAVEL IMAGE WITH DOCKER FILE
-  laravel:
+  # BUILDING LARAVEL IMAGES WITH DOCKER FILE
+  web_app_v1:
     build: .
+    container_name: "web_app_v1"
+    image: "laravel:latest"
     depends_on:
       - mysql
     ports:
-      - "8080:80"
+      - "9000:80"
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
+      ASSET_VERSION: 1.2.0
+    volumes:
+      - 'laravel_shared_storage:/var/www/html/storage'
+      - 'laravel_shared_public:/var/www/html/public'
+
   # PULLING MYSQL IMAGE AND SETTING UP ENVIRONMENT
   mysql:
     image: "mysql:8.0.40"
+    container_name: "mysql"
     ports:
       - "3366:3306"
     environment:
@@ -20,6 +28,9 @@ services:
       MYSQL_PASSWORD: "root"
     volumes:
       - 'mysql:/var/lib/mysql'
+
 # VOLUMES THAT WILL BE USED FOR PERSISTENT DATA STORAGE
 volumes:
   mysql:
+  laravel_shared_storage:
+  laravel_shared_public:
