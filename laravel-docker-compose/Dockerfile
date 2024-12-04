@@ -3,15 +3,15 @@
 FROM php:8.2-fpm as php
 
 # RUNNING ESSENCIAL COMMANDS AND INSTALLING REQUIRED SERVER PACKAGES
-RUN apt-get update
-RUN apt-get install -y nginx
-RUN apt-get install -y gzip
-RUN apt-get install -y libzip-dev
-RUN apt-get install -y git
-RUN apt-get install -y netcat-openbsd
-RUN docker-php-ext-install pdo pdo_mysql zip
-RUN apt-get -y clean
-RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    nginx \
+    gzip \
+    libzip-dev \
+    git \
+    netcat-openbsd \
+    && docker-php-ext-install pdo pdo_mysql zip \
+    && apt-get -y clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # INSTALLING COMPOSER
 COPY --from=composer:2.8.3 /usr/bin/composer /usr/bin/composer
