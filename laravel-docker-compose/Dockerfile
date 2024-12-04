@@ -8,6 +8,7 @@ RUN apt-get install -y nginx
 RUN apt-get install -y gzip
 RUN apt-get install -y libzip-dev
 RUN apt-get install -y git
+RUN apt-get install -y netcat-openbsd
 RUN docker-php-ext-install pdo pdo_mysql zip
 RUN apt-get -y clean
 RUN rm -rf /var/lib/apt/lists/*

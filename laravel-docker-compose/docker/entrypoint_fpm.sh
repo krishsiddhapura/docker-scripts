@@ -1,18 +1,27 @@
 #!/bin/sh
 
-# CLEAR LARAVEL CACHE
-php artisan cache:clear
-php artisan view:cache
-php artisan view:clear
-php artisan config:cache
-php artisan config:clear
-php artisan event:cache
-php artisan event:clear
-php artisan route:cache
-php artisan route:clear
-php artisan optimize:clear
+# Wait for MySQL to be ready
+echo "Waiting for MySQL to be ready..."
+until nc -z -v -w30 mysql 3306
+do
+  echo "Waiting for MySQL..."
+  sleep 5
+done
+echo "MySQL is ready."
 
-# MIGRATING DATABASE CACHE
+# Clear and rebuild Laravel caches
+php artisan optimize:clear
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+php artisan event:clear
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan event:cache
+
+# Run database migrations
 php artisan migrate --force
 
 # STARTING PHP FPM IN BACKGROUND

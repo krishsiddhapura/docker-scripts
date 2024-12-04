@@ -1,20 +1,4 @@
 services:
-  # BUILDING LARAVEL IMAGES WITH DOCKER FILE
-  web_app_v1:
-    build: .
-    container_name: "web_app_v1"
-    image: "laravel:latest"
-    depends_on:
-      - mysql
-    ports:
-      - "9000:80"
-    environment:
-      COMPOSER_ALLOW_SUPERUSER: 1
-      ASSET_VERSION: 1.2.0
-    volumes:
-      - 'laravel_shared_storage:/var/www/html/storage'
-      - 'laravel_shared_public:/var/www/html/public'
-
   # PULLING MYSQL IMAGE AND SETTING UP ENVIRONMENT
   mysql:
     image: "mysql:8.0.40"
@@ -28,6 +12,52 @@ services:
       MYSQL_PASSWORD: "root"
     volumes:
       - 'mysql:/var/lib/mysql'
+
+  # BUILDING LARAVEL IMAGES WITH DOCKER FILE
+  web_app_instance_1:
+    build: .
+    container_name: "web_app_instance_1"
+    ports:
+      - "8081:80"
+    environment:
+      COMPOSER_ALLOW_SUPERUSER: 1
+      ASSET_VERSION: 1.2.0
+    depends_on:
+      - "mysql"
+    volumes:
+      - 'laravel_shared_storage:/var/www/html/storage'
+      - './public:/var/www/html/public'
+      - 'laravel_shared_public:/var/www/html/public'
+
+  web_app_instance_2:
+    build: .
+    container_name: "web_app_instance_2"
+    ports:
+      - "8082:80"
+    environment:
+      COMPOSER_ALLOW_SUPERUSER: 1
+      ASSET_VERSION: 1.2.0
+    depends_on:
+      - "mysql"
+    volumes:
+      - 'laravel_shared_storage:/var/www/html/storage'
+      - './public:/var/www/html/public'
+      - 'laravel_shared_public:/var/www/html/public'
+
+  web_app_instance_3:
+    build: .
+    container_name: "web_app_instance_3"
+    ports:
+      - "8083:80"
+    environment:
+      COMPOSER_ALLOW_SUPERUSER: 1
+      ASSET_VERSION: 1.2.0
+    depends_on:
+      - "mysql"
+    volumes:
+      - 'laravel_shared_storage:/var/www/html/storage'
+      - './public:/var/www/html/public'
+      - 'laravel_shared_public:/var/www/html/public'
 
 # VOLUMES THAT WILL BE USED FOR PERSISTENT DATA STORAGE
 volumes:
