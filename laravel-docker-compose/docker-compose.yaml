@@ -8,59 +8,41 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "db_laravel_demo"
-      MYSQL_USER: "newuser"
+      MYSQL_USER: "new_user"
       MYSQL_PASSWORD: "root"
     volumes:
       - 'mysql:/var/lib/mysql'
 
   # BUILDING LARAVEL IMAGES WITH DOCKER FILE
-  web_app_instance_1:
-    build: .
-    container_name: "web_app_instance_1"
+#  laravel_app:
+#    build: .
+#    container_name: "laravel_app"
+#    restart: always
+#    ports:
+#      - "8081:80"
+#    environment:
+#      COMPOSER_ALLOW_SUPERUSER: 1
+#      ASSET_VERSION: 1.2.0
+#    depends_on:
+#      - "mysql"
+#    volumes:
+#      - './public:/var/www/html/public'
+#      - './storage:/var/www/html/storage'
+
+  # CONTAINERISING EXISTING IMAGE
+  laravel:
+    image: "laravel_app:${IMAGE_VERSION}"
     ports:
       - "8081:80"
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
       ASSET_VERSION: 1.2.0
     depends_on:
-      - "mysql"
+      - mysql
     volumes:
-      - './public:/var/www/html/public'
-      - 'laravel_shared_storage:/var/www/html/storage'
-      - 'laravel_shared_public:/var/www/html/public'
-
-  web_app_instance_2:
-    build: .
-    container_name: "web_app_instance_2"
-    ports:
-      - "8082:80"
-    environment:
-      COMPOSER_ALLOW_SUPERUSER: 1
-      ASSET_VERSION: 1.2.0
-    depends_on:
-      - "mysql"
-    volumes:
-      - './public:/var/www/html/public'
-      - 'laravel_shared_storage:/var/www/html/storage'
-      - 'laravel_shared_public:/var/www/html/public'
-
-  web_app_instance_3:
-    build: .
-    container_name: "web_app_instance_3"
-    ports:
-      - "8083:80"
-    environment:
-      COMPOSER_ALLOW_SUPERUSER: 1
-      ASSET_VERSION: 1.2.0
-    depends_on:
-      - "mysql"
-    volumes:
-      - './public:/var/www/html/public'
-      - 'laravel_shared_storage:/var/www/html/storage'
-      - 'laravel_shared_public:/var/www/html/public'
+      - "laravel_storage:/var/www/html/storage"
 
 # VOLUMES THAT WILL BE USED FOR PERSISTENT DATA STORAGE
 volumes:
   mysql:
-  laravel_shared_storage:
-  laravel_shared_public:
+  laravel_storage:
