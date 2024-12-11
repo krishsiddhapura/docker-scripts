@@ -14,33 +14,20 @@ services:
       - 'mysql:/var/lib/mysql'
 
   # BUILDING LARAVEL IMAGES WITH DOCKER FILE
-#  laravel_app:
-#    build: .
-#    container_name: "laravel_app"
-#    restart: always
-#    ports:
-#      - "8081:80"
-#    environment:
-#      COMPOSER_ALLOW_SUPERUSER: 1
-#      ASSET_VERSION: 1.2.0
-#    depends_on:
-#      - "mysql"
-#    volumes:
-#      - './public:/var/www/html/public'
-#      - './storage:/var/www/html/storage'
-
-  # CONTAINERISING EXISTING IMAGE
-  laravel:
-    image: "laravel_app:${IMAGE_VERSION}"
+  laravel_app:
+    build: .
+    container_name: "laravel_app"
+    restart: always
     ports:
       - "8081:80"
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
       ASSET_VERSION: 1.2.0
     depends_on:
-      - mysql
+      - "mysql"
     volumes:
-      - "laravel_storage:/var/www/html/storage"
+      - './public:/var/www/html/public'
+      - './storage:/var/www/html/storage'
 
 # VOLUMES THAT WILL BE USED FOR PERSISTENT DATA STORAGE
 volumes:
